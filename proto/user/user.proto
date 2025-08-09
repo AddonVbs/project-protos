@@ -9,11 +9,13 @@ import "google/protobuf/empty.proto";
 message User {
   uint32 id    = 1;
   string email = 2;
+  string password = 3;
 }
 
 // Create
 message CreateUserRequest {
   string email = 1;
+  string password = 2;
 }
 message CreateUserResponse {
   User user = 1;
@@ -29,7 +31,9 @@ message GetUserResponse {
 
 // Update
 message UpdateUserRequest {
-  User user = 1;
+  uint32 id = 1;
+  string email = 2;
+  string password = 3;
 }
 message UpdateUserResponse {
   User user = 1;
