@@ -5,13 +5,18 @@ option go_package = "project-protos/proto/user;user";
 
 import "google/protobuf/empty.proto";
 
-// Сущность пользователь
-message User {
-  uint32 id    = 1;
-  string email = 2;
-  string password = 3;
+message Task {
+  uint32 id = 1;
+  string title = 2;
+  uint32 user_id = 3;
 }
 
+message User {
+  uint32 id = 1;
+  string email = 2;
+  string password = 3;
+  repeated Task tasks = 4;
+}
 // Create
 message CreateUserRequest {
   string email = 1;
