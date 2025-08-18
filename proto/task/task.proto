@@ -9,6 +9,7 @@ import "google/protobuf/empty.proto";
 message Task {
   uint32 id      = 1;
   string title   = 2;
+  uint32 user_id = 3; // связь с пользователем
 }
 
 
@@ -33,6 +34,14 @@ message DeleteTaskRequest {
   uint32 id = 1;
 }
 
+message GetTasksByUserIDRequest {
+  uint32 user_id = 1;
+}
+
+message GetTasksByUserIDResponse {
+  repeated Task tasks = 1;
+}
+
 
 service TaskService {
   rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
@@ -40,4 +49,6 @@ service TaskService {
   rpc ListTasks  (google.protobuf.Empty) returns (ListTasksResponse);
   rpc UpdateTask (UpdateTaskRequest) returns (Task);
   rpc DeleteTask (DeleteTaskRequest) returns (google.protobuf.Empty);
+  rpc GetTasksByUserID(GetTasksByUserIDRequest) returns (GetTasksByUserIDResponse);
+
 }

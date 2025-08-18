@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TaskService_CreateTask_FullMethodName = "/task.TaskService/CreateTask"
-	TaskService_GetTask_FullMethodName    = "/task.TaskService/GetTask"
-	TaskService_ListTasks_FullMethodName  = "/task.TaskService/ListTasks"
-	TaskService_UpdateTask_FullMethodName = "/task.TaskService/UpdateTask"
-	TaskService_DeleteTask_FullMethodName = "/task.TaskService/DeleteTask"
+	TaskService_CreateTask_FullMethodName       = "/task.TaskService/CreateTask"
+	TaskService_GetTask_FullMethodName          = "/task.TaskService/GetTask"
+	TaskService_ListTasks_FullMethodName        = "/task.TaskService/ListTasks"
+	TaskService_UpdateTask_FullMethodName       = "/task.TaskService/UpdateTask"
+	TaskService_DeleteTask_FullMethodName       = "/task.TaskService/DeleteTask"
+	TaskService_GetTasksByUserID_FullMethodName = "/task.TaskService/GetTasksByUserID"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -36,6 +37,7 @@ type TaskServiceClient interface {
 	ListTasks(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListTasksResponse, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*Task, error)
 	DeleteTask(ctx context.Context, in *DeleteTaskRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetTasksByUserID(ctx context.Context, in *GetTasksByUserIDRequest, opts ...grpc.CallOption) (*GetTasksByUserIDResponse, error)
 }
 
 type taskServiceClient struct {
@@ -96,6 +98,16 @@ func (c *taskServiceClient) DeleteTask(ctx context.Context, in *DeleteTaskReques
 	return out, nil
 }
 
+func (c *taskServiceClient) GetTasksByUserID(ctx context.Context, in *GetTasksByUserIDRequest, opts ...grpc.CallOption) (*GetTasksByUserIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTasksByUserIDResponse)
+	err := c.cc.Invoke(ctx, TaskService_GetTasksByUserID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TaskServiceServer is the server API for TaskService service.
 // All implementations must embed UnimplementedTaskServiceServer
 // for forward compatibility.
@@ -105,6 +117,7 @@ type TaskServiceServer interface {
 	ListTasks(context.Context, *emptypb.Empty) (*ListTasksResponse, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*Task, error)
 	DeleteTask(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error)
+	GetTasksByUserID(context.Context, *GetTasksByUserIDRequest) (*GetTasksByUserIDResponse, error)
 	mustEmbedUnimplementedTaskServiceServer()
 }
 
@@ -129,6 +142,9 @@ func (UnimplementedTaskServiceServer) UpdateTask(context.Context, *UpdateTaskReq
 }
 func (UnimplementedTaskServiceServer) DeleteTask(context.Context, *DeleteTaskRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTask not implemented")
+}
+func (UnimplementedTaskServiceServer) GetTasksByUserID(context.Context, *GetTasksByUserIDRequest) (*GetTasksByUserIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTasksByUserID not implemented")
 }
 func (UnimplementedTaskServiceServer) mustEmbedUnimplementedTaskServiceServer() {}
 func (UnimplementedTaskServiceServer) testEmbeddedByValue()                     {}
@@ -241,6 +257,24 @@ func _TaskService_DeleteTask_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TaskService_GetTasksByUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTasksByUserIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServiceServer).GetTasksByUserID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TaskService_GetTasksByUserID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServiceServer).GetTasksByUserID(ctx, req.(*GetTasksByUserIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TaskService_ServiceDesc is the grpc.ServiceDesc for TaskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -267,6 +301,10 @@ var TaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteTask",
 			Handler:    _TaskService_DeleteTask_Handler,
+		},
+		{
+			MethodName: "GetTasksByUserID",
+			Handler:    _TaskService_GetTasksByUserID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
