@@ -15,6 +15,7 @@ message Task {
 
 message CreateTaskRequest {
   string title = 1;
+  int32 user_id = 2; // 👈 добавь это поле
 }
 message CreateTaskResponse {
   Task task = 1;
