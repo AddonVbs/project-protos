@@ -27,7 +27,7 @@ type Task struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	UserId        uint32                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // связь с пользователем
+	UserID        uint32                 `protobuf:"varint,3,opt,name=UserID,proto3" json:"UserID,omitempty"` // 👈 UserID
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,9 +76,9 @@ func (x *Task) GetTitle() string {
 	return ""
 }
 
-func (x *Task) GetUserId() uint32 {
+func (x *Task) GetUserID() uint32 {
 	if x != nil {
-		return x.UserId
+		return x.UserID
 	}
 	return 0
 }
@@ -86,7 +86,7 @@ func (x *Task) GetUserId() uint32 {
 type CreateTaskRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	UserId        int32                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 👈 добавь это поле
+	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"` // 👈 camelCase, а не snake_case
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,9 +128,9 @@ func (x *CreateTaskRequest) GetTitle() string {
 	return ""
 }
 
-func (x *CreateTaskRequest) GetUserId() int32 {
+func (x *CreateTaskRequest) GetUserID() int32 {
 	if x != nil {
-		return x.UserId
+		return x.UserID
 	}
 	return 0
 }
@@ -411,14 +411,14 @@ var File_proto_task_task_proto protoreflect.FileDescriptor
 
 const file_proto_task_task_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/task/task.proto\x12\x04task\x1a\x1bgoogle/protobuf/empty.proto\"E\n" +
+	"\x15proto/task/task.proto\x12\x04task\x1a\x1bgoogle/protobuf/empty.proto\"D\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\rR\x06userId\"B\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x16\n" +
+	"\x06UserID\x18\x03 \x01(\rR\x06UserID\"A\n" +
 	"\x11CreateTaskRequest\x12\x14\n" +
-	"\x05title\x18\x01 \x01(\tR\x05title\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x05R\x06userId\"4\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\x12\x16\n" +
+	"\x06userID\x18\x02 \x01(\x05R\x06userID\"4\n" +
 	"\x12CreateTaskResponse\x12\x1e\n" +
 	"\x04task\x18\x01 \x01(\v2\n" +
 	".task.TaskR\x04task\"5\n" +

@@ -9,13 +9,13 @@ import "google/protobuf/empty.proto";
 message Task {
   uint32 id      = 1;
   string title   = 2;
-  uint32 user_id = 3; // связь с пользователем
+  uint32 UserID = 3; // 👈 UserID
 }
 
 
 message CreateTaskRequest {
   string title = 1;
-  int32 user_id = 2; // 👈 добавь это поле
+  int32 userID  = 2; // 👈 camelCase, а не snake_case
 }
 message CreateTaskResponse {
   Task task = 1;
