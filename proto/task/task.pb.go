@@ -86,7 +86,7 @@ func (x *Task) GetUserID() uint32 {
 type CreateTaskRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
-	UserID        int32                  `protobuf:"varint,2,opt,name=userID,proto3" json:"userID,omitempty"` // 👈 camelCase, а не snake_case
+	UserID        int32                  `protobuf:"varint,2,opt,name=UserID,proto3" json:"UserID,omitempty"` // 👈 camelCase, а не snake_case
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -321,7 +321,7 @@ func (x *DeleteTaskRequest) GetId() uint32 {
 
 type GetTasksByUserIDRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint32                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserID        uint32                 `protobuf:"varint,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -356,9 +356,9 @@ func (*GetTasksByUserIDRequest) Descriptor() ([]byte, []int) {
 	return file_proto_task_task_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetTasksByUserIDRequest) GetUserId() uint32 {
+func (x *GetTasksByUserIDRequest) GetUserID() uint32 {
 	if x != nil {
-		return x.UserId
+		return x.UserID
 	}
 	return 0
 }
@@ -418,7 +418,7 @@ const file_proto_task_task_proto_rawDesc = "" +
 	"\x06UserID\x18\x03 \x01(\rR\x06UserID\"A\n" +
 	"\x11CreateTaskRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x16\n" +
-	"\x06userID\x18\x02 \x01(\x05R\x06userID\"4\n" +
+	"\x06UserID\x18\x02 \x01(\x05R\x06UserID\"4\n" +
 	"\x12CreateTaskResponse\x12\x1e\n" +
 	"\x04task\x18\x01 \x01(\v2\n" +
 	".task.TaskR\x04task\"5\n" +
@@ -429,9 +429,9 @@ const file_proto_task_task_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\"#\n" +
 	"\x11DeleteTaskRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\rR\x02id\"2\n" +
-	"\x17GetTasksByUserIDRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\rR\x06userId\"<\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\"1\n" +
+	"\x17GetTasksByUserIDRequest\x12\x16\n" +
+	"\x06UserID\x18\x01 \x01(\rR\x06UserID\"<\n" +
 	"\x18GetTasksByUserIDResponse\x12 \n" +
 	"\x05tasks\x18\x01 \x03(\v2\n" +
 	".task.TaskR\x05tasks2\xf4\x02\n" +
